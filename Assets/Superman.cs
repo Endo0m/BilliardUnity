@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Superman : MonoBehaviour
 {
-    public float force = 10f; // сила удара 
-    public float forceTouch = 3f; // сила удара мячиков
+    public float force = 10f; // Г±ГЁГ«Г  ГіГ¤Г Г°Г  
+    public float forceTouch = 3f; // Г±ГЁГ«Г  ГіГ¤Г Г°Г  Г¬ГїГ·ГЁГЄГ®Гў
 
 
     private int goodboyLayer;
@@ -22,8 +22,8 @@ public class Superman : MonoBehaviour
 
         if (rb != null)
         {
-            Vector3 forceDirection = new Vector3(-1, 0, 0).normalized; // направление силы удара
-            rb.AddForce(forceDirection * force, ForceMode.Impulse); // добавление импульса для движения объекта
+            Vector3 forceDirection = new Vector3(-1, 0, 0).normalized; // Г­Г ГЇГ°Г ГўГ«ГҐГ­ГЁГҐ Г±ГЁГ«Г» ГіГ¤Г Г°Г 
+            rb.AddForce(forceDirection * force, ForceMode.Impulse); // Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ ГЁГ¬ГЇГіГ«ГјГ±Г  Г¤Г«Гї Г¤ГўГЁГ¦ГҐГ­ГЁГї Г®ГЎГєГҐГЄГІГ 
         }
     }
 
@@ -33,21 +33,17 @@ public class Superman : MonoBehaviour
         if (rb != null && collision.gameObject.GetComponent<Rigidbody>() != null)
         {
             int collisionLayer = collision.gameObject.layer;
-
-            //if (collisionLayer == goodboyLayer)
-            //{
-            //    Physics.IgnoreCollision(collision.collider, GetComponent<Collider>(), true);
-            //}
+            
             if (collisionLayer == badguyLayer)
             {
-                Vector3 forceDirection = collision.contacts[0].point - transform.position; // направление на центр объекта
-                float forceMagnitude = forceDirection.magnitude; // величина силы удара
-                forceDirection.Normalize(); // нормализация направления силы
+                Vector3 forceDirection = collision.contacts[0].point - transform.position; // Г­Г ГЇГ°Г ГўГ«ГҐГ­ГЁГҐ Г­Г  Г¶ГҐГ­ГІГ° Г®ГЎГєГҐГЄГІГ 
+                float forceMagnitude = forceDirection.magnitude; // ГўГҐГ«ГЁГ·ГЁГ­Г  Г±ГЁГ«Г» ГіГ¤Г Г°Г 
+                forceDirection.Normalize(); // Г­Г®Г°Г¬Г Г«ГЁГ§Г Г¶ГЁГї Г­Г ГЇГ°Г ГўГ«ГҐГ­ГЁГї Г±ГЁГ«Г»
 
-                // добавление силы удара для обоих объектов
+                // Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ Г±ГЁГ«Г» ГіГ¤Г Г°Г  Г¤Г«Гї Г®ГЎГ®ГЁГµ Г®ГЎГєГҐГЄГІГ®Гў
                 rb.AddForce(-forceDirection * forceMagnitude, ForceMode.Impulse);
                 collision.gameObject.GetComponent<Rigidbody>().AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
-                // collision.gameObject.GetComponent<Rigidbody>().AddForce(forceDirection * forceTouch, ForceMode.Impulse); // добавление силы удара
+             
             }
         }
 
